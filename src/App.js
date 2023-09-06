@@ -215,7 +215,6 @@ function App() {
       {isLogin && <Header />}
       {isLogin && <div className="h-[70px]" />}
       <Routes>
-        {/* {isLogin && <> */}
         <Route
           exact
           path="/"

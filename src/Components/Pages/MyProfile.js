@@ -48,6 +48,7 @@ const MyProfile = () => {
   const userInfo = useSelector((state) => state.user);
   const education = useSelector((state) => state.education);
   const experience = useSelector((state) => state.experience);
+  console.log(useLocation());
 
   let component = (
     <div className="flex flex-col w-[100%] h-auto max-w-[550px]">

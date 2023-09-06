@@ -51,7 +51,10 @@ const SignIn = () => {
       window.location.reload();
       navigate("/");
     } else {
-      navigate("/my-profile?newuser=true");
+      // console.log("called");
+      setTimeout(()=>{
+        navigate("/my-profile?newuser=true");
+      },1000)
     }
 
     // Reset values
