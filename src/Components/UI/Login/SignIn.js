@@ -114,7 +114,7 @@ const SignIn = () => {
             </label>
             <input
               className="pl-5 border-[1.5px] rounded-sm hover:bg-gray-200 hover:border-[2px] hover:border-black border-gray-500 h-[50px]"
-              type="pasword"
+              type="password"
               value={password}
               onChange={(e) => inputHandler(e, "pass")}
               required
