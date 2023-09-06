@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import logo from "../../Assets/logo.svg";
 import search from "../../Assets/search.svg";
 import home from "../../Assets/home-f.svg";
@@ -43,10 +43,10 @@ const Header = () => {
     setPath(cpath);
   }, [cpath]);
   // console.log(location);
-  return searchModal ? (
-    <SearchModal modalCloseHandler={searchModalHandler} />
-  ) : (
-    <div className="bg-white w-full   fixed top-0 left-0  lg:pl-20   h-[70px] pl-3 pr-3 flex gap-5 z-50 items-center justify-between ">
+  return (
+  <Fragment>
+    {searchModal && <SearchModal searchModal={searchModal} modalCloseHandler={searchModalHandler} />}
+    <div className="bg-white w-full   fixed top-0 left-0  lg:pl-20 z-10  h-[70px] pl-3 pr-3 flex gap-5  items-center justify-between ">
       <div className="flex">
         {/* ------------------------logo icon-------------------- */}
         <div className=" w-[45px] h-[45px]  flex items-center justify-center">
@@ -185,7 +185,8 @@ const Header = () => {
         )}
       </div>
     </div>
-  );
+  </Fragment>
+  )
 };
 
 export default Header;

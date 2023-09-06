@@ -27,6 +27,7 @@ import ChatRoom from "./Components/Pages/ChatRoom";
 import SkeletonLoader from "./Components/UI/Utils/SkeletonLoader";
 
 
+
 function App() {
   const [userInfo, setUserInfo] = useState(null);
   const [uid, setUid] = useState(null);
@@ -210,6 +211,7 @@ function App() {
   if (loading) return <SkeletonLoader />;
   return (
     <div className="bg-gray-200 w-full h-auto  flex flex-col items-center justify-center">
+      
       {isLogin && <Header />}
       {isLogin && <div className="h-[70px]" />}
       <Routes>

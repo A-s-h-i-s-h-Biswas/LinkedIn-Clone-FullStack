@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback, Fragment } from "react";
+import React, { useState, useEffect, useCallback, Fragment, useRef } from "react";
 // import ModalContainer from "./ModalContainer";
 import { SearchUser } from "./Utils/data";
 import { useNavigate } from "react-router-dom";
 import { getAllChildData } from "../../firebase/firebase";
 import { useSelector } from "react-redux";
 
-const SearchModal = ({ modalCloseHandler }) => {
+const SearchModal = ({ modalCloseHandler, SearchModal}) => {
   const textWrapper = (text, word = 30) => {
     if (text.length < word) return text;
     return text.substring(0, word) + "...";
@@ -13,6 +13,7 @@ const SearchModal = ({ modalCloseHandler }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [resultUsers, setResultUsers] = useState([]);
   const user = useSelector((state) => state.user);
+  const modalref=useRef();
   const navigate = useNavigate();
 
   const setAllUserHandler = useCallback((payload) => {
@@ -46,14 +47,17 @@ const SearchModal = ({ modalCloseHandler }) => {
     // if(payload === user.uid)navigate(`/my-profile`);
     navigate(`/my-profile/${payload}`);
   };
+  useEffect(()=>{
+    modalref.current?.scrollIntoView({ behavior: "smooth" });
+  },[SearchModal])
 
   return (
-    <Fragment>
+    <Fragment >
       <div
         onClick={() => modalCloseHandler(false)}
-        className="w-[100%] h-[100%] z-20 fixed top-0 left-0 bg-[rgba(0,0,0,0.45)] overflow-hidden"
+        className="w-[100%] h-screen z-20 fixed top-0 left-0 bg-[rgba(0,0,0,0.45)] overflow-hidden"
       />
-      <div className="absolute w-[350px] min-h-[150px] rounded-md z-20 top-0 left-[calc(50%-175px)] bg-white shadow-lg shadow-gray-800/90  pl-3 pr-3 flex flex-col  justify-between">
+      <div ref={modalref} className="absolute w-[350px] min-h-[150px] rounded-md z-20 top-0 left-[calc(50%-175px)] bg-white shadow-lg shadow-gray-800/90  pl-3 pr-3 flex flex-col  justify-between">
         <input
           className="w-[100%] bg-gray-50 h-[40px] mt-3 mb-3 hover:border-[2px] rounded-3xl pl-4 border-[1.5px] border-slate-800 "
           type="text"
