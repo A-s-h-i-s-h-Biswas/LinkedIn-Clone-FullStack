@@ -14,11 +14,11 @@ import connect from "../../Assets/connect.svg";
 import follow from "../../Assets/follow.svg";
 import UserCard from "../UI/NetworkHelper/UserCard";
 import FollowCard from "../UI/NetworkHelper/FollowCard";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getAllChildData, writeData } from "../../firebase/firebase";
 import InvitationSent from "../UI/NetworkHelper/InvitationSent";
 import ToggleContainer from "../UI/Utils/ToggleContainer";
-import { connectionActions } from "../../store/connection-slice";
+// import { connectionActions } from "../../store/connection-slice";
 import {
   ADD_CONNECTION,
   ADD_TO_CONNECTION_LIST,
@@ -28,16 +28,7 @@ import {
 } from "../UI/Utils/data";
 import SkeletonLoader from "../UI/Utils/SkeletonLoader";
 
-// const SortData = (data) => {
-//   // console.log(comments);
-//   const sortedData = [];
-//   Object.keys(data)
-//     .sort((a, b) => b - a)
-//     .forEach((childKey) => {
-//       sortedData.push(data[childKey]);
-//     });
-//   return sortedData;
-// };
+
 
 const Network = () => {
   const [connections, setConnections] = useState(false);
@@ -51,7 +42,7 @@ const Network = () => {
   const [Requests, setRequests] = useState([]);
   const [sentRequests, setSentRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [sortBtn, setSortBtn] = useState("label1");
   const sortBtnHandler = (payload) => {
@@ -162,7 +153,7 @@ const Network = () => {
     setRequests(filteredReq);
     // ---------------remove request from both user list----------------
 
-    REMOVE_REQUEST({ key: `getRequest/${user.uid}`, d: payload.uid });
+    REMOVE_REQUEST({ key: `getRequest/${user.uid}`, id: payload.uid });
     REMOVE_REQUEST({ key: `postRequest/${payload.uid}`, id: user.uid });
     // ----------------add both as connected user in connections list-----------------
     ADD_TO_CONNECTION_LIST({ myid: payload.uid, user });
@@ -180,14 +171,14 @@ const Network = () => {
     });
 
     // ------------------update connection store--------------
-    dispatch(
-      connectionActions.addConnection({
-        uid: payload.uid,
-        name: payload.name,
-        pic: payload.pic,
-        bio: payload.bio,
-      })
-    );
+    // dispatch(
+    //   connectionActions.addConnection({
+    //     uid: payload.uid,
+    //     name: payload.name,
+    //     pic: payload.pic,
+    //     bio: payload.bio,
+    //   })
+    // );
     // ----------send notification to let the user know request accepted-------------
     const status = ` accepted your connection request. You can send message to ${user.name}`;
     SEND_NOTIFICATION({
@@ -265,14 +256,7 @@ const Network = () => {
               label={"Message"}
             />
           ))}
-          <div className="flex items-center justify-center">
-            <button
-              onClick={openConnectionHandler}
-              className="border-rose-500 border-[1.5px] hover:border-[2px] h-[45px] w-[180px] rounded-3xl  text-slate-800 opacity-60 font-bold "
-            >
-              Hide Connections
-            </button>
-          </div>
+          
         </div>
       )}
       {(Requests.length > 0 || setRequests.length > 0) && (
