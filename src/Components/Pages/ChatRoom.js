@@ -48,7 +48,7 @@ const ChatRoom = () => {
   // console.log(getId);
 
   return (
-    <div className="bg-gray-100  rounded overflow-hidden w-[100%] max-w-[500px] min-h-[570px] flex flex-col">
+    <div className="bg-gray-100  rounded overflow-hidden w-[100%] max-w-[500px] flex flex-col">
       <div className=" w-[100%] h-[65px] fixed max-w-[500px] z-10 pl-3 flex items-center bg-blue-300">
         <div className="w-[50px] h-[50px] rounded-full overflow-hidden">
           <img
@@ -59,7 +59,7 @@ const ChatRoom = () => {
         </div>
         <p className="pl-3 font-bold opacity-70 text-white">{roomer?.name}</p>
       </div>
-      <div className="w-[100%] min-h-[400px] mt-[66px] pl-3 pr-3 flex flex-col  bg-gray-100">
+      <div className="w-[100%] min-h-[300px] mt-[66px] pl-3 pr-3 flex flex-col  bg-gray-100">
         {messages.map((msg) =>
           msg.uid === uid ? (
             <div>
